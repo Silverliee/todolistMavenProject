@@ -47,15 +47,18 @@ public class Todolist {
 			throw new TodolistMaxItemsReached();
 		}
 		if (this.items.size() == 7) {
-			return true;
+			String var = "none";
 		}
-		if (this.items.size() > 1) {
-			Date lastItemCreationDatetime = this.items.get(this.items.size() - 1).getCreationDate();
+		if (this.items.size() > 0) {
+			Date lasItemExpectedMinimalTime = new Date(this.items.get(this.items.size() - 1).getCreationDate().getTime() + (30 * 60 * 1000));
 			Date now = new Date();
-			if ((now.getTime() - lastItemCreationDatetime.getTime()) >= 30 * 60 * 1000) {
+			if ((lasItemExpectedMinimalTime.getTime() <= now.getTime())) {
 				this.items.add(item);
 				return true;
 			}
+		} else {
+			this.items.add(item);
+			return true;
 		}
 		return false;
 	}

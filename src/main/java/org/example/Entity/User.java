@@ -2,10 +2,9 @@ package org.example.Entity;
 
 import org.example.Exception.InvalideEmailException;
 import org.example.Exception.InvalideOldException;
-import org.example.Exception.InvalidePasswordLenghException;
+import org.example.Exception.InvalidePasswordLengthException;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -54,9 +53,9 @@ public class User {
 	/**
 	 * @return true if user is valid else return false or exception
 	 */
-	public boolean isValid() throws InvalideOldException, InvalideEmailException, InvalidePasswordLenghException {
+	public boolean isValid() throws InvalideOldException, InvalideEmailException, InvalidePasswordLengthException {
 		LocalDate now = LocalDate.now();
-		Pattern emailRegex = Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$");
+		Pattern emailRegex = Pattern.compile("\\b[\\w.-]+@[\\w.-]+\\.\\w{2,4}\\b");
 		Matcher emailIsValid = emailRegex.matcher(this.mailAddress);
 		if (!this.birthday.isBefore(now.minusYears(13))) {
 			throw new InvalideOldException();
@@ -65,7 +64,7 @@ public class User {
 			throw new InvalideEmailException();
 		}
 		if ((this.password.length() < 8) || (this.password.length() > 40)) {
-			throw new InvalidePasswordLenghException();
+			throw new InvalidePasswordLengthException();
 		}
 		return true;
 	}
