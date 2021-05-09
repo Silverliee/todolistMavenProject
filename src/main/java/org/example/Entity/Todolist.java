@@ -47,7 +47,7 @@ public class Todolist {
 			throw new TodolistMaxItemsReached();
 		}
 		if (this.items.size() == 7) {
-			String var = "none";
+			System.out.println("Plus que 2 items avant d'être full");
 		}
 		if (this.items.size() > 0) {
 			Date lasItemExpectedMinimalTime = new Date(this.items.get(this.items.size() - 1).getCreationDate().getTime() + (30 * 60 * 1000));
